@@ -1,0 +1,23 @@
+{
+    "name": "https-error",
+    "version": "1.0.0",
+    "description": "Provides the HttpsError class and associated factory methods.",
+    "main": "https-error.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/fhellwig/https-error"
+    },
+    "keywords": [
+        "HTTPS",
+        "Error"
+    ],
+    "author": "Frank Hellwig",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/fhellwig/https-error/issues"
+    },
+    "homepage": "https://github.com/fhellwig/https-error"
+}
