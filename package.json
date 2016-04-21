@@ -1,6 +1,6 @@
 {
     "name": "https-error",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Provides the HttpsError class and associated factory methods.",
     "main": "https-error.js",
     "scripts": {

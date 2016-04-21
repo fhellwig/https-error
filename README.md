@@ -23,6 +23,12 @@ let err = HttpsError.internalServerError('Cannot connect to the database.');
 
 console.log(err.toString());
 // Error: 500 (Internal Server Error) Cannot connect to the database.
+
+console.log(err.toJson());
+// Outputs an object.
+
+console.log(err.toHtml());
+// Outputs an HTML string.
 ```
 
 The `badRequest` method and `internalServerError` method are factory methods. No `new` keyword is required. There is one factory method for each of the 400- and 500-series errors.

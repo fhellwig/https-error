@@ -189,12 +189,17 @@ const errors = {
     }
 };
 
+const htmlTemplate =
+    '<div style="font-family:monospace;font-size:1.2em;margin:1em">' +
+    '<p><strong>%d (%s)</strong></p><p>%s</p>' +
+    '</div>';
+
 class HttpsError extends Error {
 
     constructor(code, text, message) {
         super(message);
-        this.name = 'HttpsError',
-            this._code = code;
+        this.name = 'HttpsError';
+        this._code = code;
         this._text = text;
     }
 
@@ -208,7 +213,20 @@ class HttpsError extends Error {
 
     toString() {
         return util.format('Error: %d (%s) %s',
-            this._code, this._text, this.message);
+            this.code, this.text, this.message);
+    }
+
+    toJson() {
+        return {
+            status: 'error',
+            code: this.code,
+            text: this.text,
+            message: this.message
+        };
+    }
+
+    toHtml() {
+        return util.format(htmlTemplate, this.code, this.text, this.message);
     }
 }
 
