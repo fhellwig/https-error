@@ -2,6 +2,8 @@
 
 Provides the `HttpsError` class and associated factory methods.
 
+Version 1.0.2
+
 ## Usage
 
 ```
@@ -38,7 +40,7 @@ If you want to call the constructor yourself, you can:
 ```javascript
 function sqrt(val) {
 	if (val < 0) {
-	    throw new HttpsError(400, 'Bad Request', util.format('Value %d cannot be negative.', val));
+	    throw new HttpsError(400, util.format('Value %d cannot be negative.', val));
 	} else {
 	    return Math.sqrt(val);
     }
@@ -49,7 +51,6 @@ As you can see, using the factory method...
 
 - is more readable,
 - does not require the `new` keyword,
-- includes the descriptive text, and
 - handles `util.format` arguments.
 
 You can also pass in an `Error` object...

@@ -189,6 +189,21 @@ const errors = {
     }
 };
 
+// Maps codes to their text description (e.g., 404 -> 'Not Found').
+const byCode = {};
+
+// Populate the byCode object.
+Object.keys(errors).forEach(key => {
+    let error = errors[key];
+    byCode[error.code] = error.text;
+});
+
+// Given a code, returns the text description.
+function findText(code) {
+    return byCode[code] || 'Unknown Code';
+}
+
+// The template for the toHtml() method.
 const htmlTemplate =
     '<div style="font-family:monospace;font-size:1.2em;margin:1em">' +
     '<p><strong>%d (%s)</strong></p><p>%s</p>' +
@@ -196,11 +211,11 @@ const htmlTemplate =
 
 class HttpsError extends Error {
 
-    constructor(code, text, message) {
+    constructor(code, message) {
         super(message);
         this.name = 'HttpsError';
         this._code = code;
-        this._text = text;
+        this._text = findText(code);
     }
 
     get code() {
@@ -230,15 +245,17 @@ class HttpsError extends Error {
     }
 }
 
+// Create a static factory method for each error. The factory method takes
+// an error object or one or more arguments that are passed to util.format.
 Object.keys(errors).forEach(key => {
-    let error = errors[key];
+    let code = errors[key].code;
     HttpsError[key] = function(err) {
         if (err instanceof Error) {
-            return new HttpsError(error.code, error.text, err.message);
+            return new HttpsError(code, err.message);
         } else {
             let args = Array.prototype.slice.call(arguments);
             let message = util.format.apply(util, args);
-            return new HttpsError(error.code, error.text, message);
+            return new HttpsError(code, message);
         }
     }
 });
